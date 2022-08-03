@@ -25,7 +25,7 @@ Possible Guide: [How to Set up an Apple Mac for Software Development](https://ww
 * enable bash completions (while using zsh).
 * Git clone dotfiles (git@github.com:SeattleChris/dotfiles.git) repo & submodules
 * Install Oh-My-Zsh into .config directory.
-* Copy zsh config files to root
+* Copy dotfiles zsh setup files to user root.
 Open terminal and execute commands:
 
 ```Shell
@@ -50,7 +50,9 @@ autoload bashcompinit && bashcompinit
 git clone git@github.com:SeattleChris/dotfiles.git
 git submodule update --init --recursive
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-typeset
+typeset -a z_files; z_files=('zlogin' 'zprofile' 'zshenv' 'zshrc')
+typeset SRC="${SHELLDIR:-$HOME/dotfiles/shell}"
+for z in "${z_files[@]}"; do cp '-i' "${SRC}/${z}" "${HOME}/.${z}"; done
 ```
 
 ## Dev Tooling
@@ -94,10 +96,13 @@ ssh-keygen -t rsa -b 4096 -C "Me MyName (MyDevice) <me@mydomain.com>"
 
 ## Personal Programs
 
+* Open another shell tab in iTerm2; install p10k recommended font.
+  * Follow instructions for font install. Other p10k settings already in dotfiles configuration.
 * Install [Facebook Messenger](https://formulae.brew.sh/cask/messenger)
 * Install Discord
 
 ```Shell
+p10k configure
 brew install --cask messenger
 brew install --cask discord
 ```

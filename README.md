@@ -32,9 +32,15 @@ Possible Guide: [How to Set up an Apple Mac for Software Development](https://ww
 * Install [pygments](https://formulae.brew.sh/formula/pygments) (python colorizing) or 'chroma'
 * Add upgraded bash (/opt/homebrew/bin/bash) to allowed shells (/private/etc/shells)
 * enable bash completions (while using zsh).
-* Install Oh-My-Zsh into .config directory (assuming `pre_install_env.sh` worked)
-* Git clone [dotfiles](https://github.com/SeattleChris/dotfiles.git) repo & submodules
-* Copy dotfiles zsh setup files for the user (.zshrc, .zshenv, .zprofile, .zlogin, etc)
+* Download & run Oh-My-Zsh install (into .config directory, assuming `pre_install_env.sh` worked)
+* Get and use settings from dotfiles repo with `get_dotfiles.sh`
+  * Uses git to clone $DOTFILEREPO into ${DOTFILEDIR:-$HOME/dotfiles} directory.
+  * The default for DOTFILEREPO is [dotfiles](https://github.com/SeattleChris/dotfiles.git)
+  * Can override. e.g. `typeset DOTFILEREPO="https://repo-url.com/path/to/repo"`
+  * Also clones sub-modules and updates them.
+  * Copies zsh config files:
+    * from ${SHELLDIR:-$HOME/dotfiles/shell}/{{name}} to ${ZDOTDIR:-$HOME}/.{{name}}
+    * for each 'name' of files: zshenv zprofile zshrc zlogin
 
 Open terminal and execute commands:
 

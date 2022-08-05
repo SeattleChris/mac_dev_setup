@@ -21,9 +21,10 @@ Possible Guide: [How to Set up an Apple Mac for Software Development](https://ww
 * Install [pre-commit](https://formulae.brew.sh/formula/pre-commit)
 * Install [NeoVim](https://formulae.brew.sh/formula/neovim)
 * Install [iTerm2](https://formulae.brew.sh/cask/iterm2)
+* Install [pygments](https://formulae.brew.sh/formula/pygments) (python colorizing) or 'chroma'
 * Add upgraded bash (/opt/homebrew/bin/bash) to allowed shells (/private/etc/shells)
 * enable bash completions (while using zsh).
-* Git clone dotfiles (git@github.com:SeattleChris/dotfiles.git) repo & submodules
+* Git clone [dotfiles](https://github.com/SeattleChris/dotfiles.git) repo & submodules
 * Install Oh-My-Zsh into .config directory.
 * Copy dotfiles zsh setup files to user root.
 Open terminal and execute commands:
@@ -42,17 +43,17 @@ export npm_config_cache=$XDG_CONFIG_HOME/npm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npmrc
 brew doctor
 brew update
-xcode-select --install
-brew install bash git shellcheck pre-commit neovim
+brew install bash shellcheck pre-commit neovim pygments
 brew install --cask iterm2
-sudo vim /private/etc/shells    [add line: /opt/homebrew/bin/bash ]
+echo "/opt/homebrew/bin/bash" | sudo tee -a /private/etc/shells
 autoload bashcompinit && bashcompinit
-git clone git@github.com:SeattleChris/dotfiles.git
+git clone git@github.com:SeattleChris/dotfiles.git "${DOTFILEDIR:-$HOME/dotfiles}" || exit
+cd "${DOTFILEDIR:-$HOME/dotfiles}" || exit
 git submodule update --init --recursive
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 typeset -a z_files; z_files=('zlogin' 'zprofile' 'zshenv' 'zshrc')
-typeset SRC="${SHELLDIR:-$HOME/dotfiles/shell}"
-for z in "${z_files[@]}"; do cp '-i' "${SRC}/${z}" "${HOME}/.${z}"; done
+typeset src="${SHELLDIR:-$HOME/dotfiles/shell}" dest="${ZDOTDIR:-$HOME}"
+for z in "${z_files[@]}"; do cp '-i' "${src}/${z}" "${dest}/.${z}"; done
 ```
 
 ## Dev Tooling

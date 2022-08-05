@@ -58,6 +58,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 source get_dotfiles.sh
 ```
 
+Shutdown terminal app and restart to use the new zsh initialization files.
+
 ## Dev Tooling
 
 Decide which of the following needed, and install as desired:
@@ -68,7 +70,12 @@ Decide which of the following needed, and install as desired:
 * PostgreSQL
   * If you upgrade your copy of PostgreSQL, you should use the postgresql-upgrade-database command that Homebrew gives you.
 * [Pyenv](https://github.com/pyenv/pyenv)
-* [Node (JavaScript)]() Use `@LTS` or replace with pinned version, such as Node 16 - `@16`
+* Install [NVM](https://github.com/nvm-sh/nvm)
+  * Default: [zsh-nvm](https://github.com/lukechilds/zsh-nvm) - Using plugin repo as sub-module.
+  * With Brew: `brew install nvm` (not supported by nvm directly)
+  * Instructions from [NVM Repo](https://github.com/nvm-sh/nvm)
+    * `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
+* [Node using NVM](https://github.com/nvm-sh/nvm) Use `@LTS` or pinned version, e.g. `@16`
 
 ```Shell
 brew install --cask visual-studio-code
@@ -76,7 +83,7 @@ brew install --cask zoom
 brew install autoconf automake gdbm gmp libksba libtool libyaml openssl pkg-config readline
 brew install postgresql
 brew install pyenv
-brew install node@LTS
+nvm install --lts
 ```
 
 Add each of the following to Path:

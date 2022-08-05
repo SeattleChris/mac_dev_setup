@@ -58,7 +58,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 source get_dotfiles.sh
 ```
 
-Shutdown terminal app and restart to use the new zsh initialization files.
+* Consider using GitHub's credential manager
+  * [GitCredentialManager](https://github.com/GitCredentialManager/git-credential-manager)
+  * likely fine using osX default: `credential.helper=osxkeychain`
+* Shutdown terminal app and restart to use the new zsh initialization files.
+* Open another shell tab in iTerm2; install p10k recommended font.
+  * Follow instructions for font install. Other p10k settings already in dotfiles configuration.
 
 ## Dev Tooling
 
@@ -66,10 +71,11 @@ Decide which of the following needed, and install as desired:
 
 * [Visual Studio Code](https://formulae.brew.sh/cask/visual-studio-code)
   * Or instead - [VSCodium](https://vscodium.com) replace with `brew install --cask vscodium`
+  * May need to install font for vs-code terminal to match font installed by p10k.
 * Ruby Development updates and tools (used by MacOS a lot).
 * PostgreSQL
   * If you upgrade your copy of PostgreSQL, you should use the postgresql-upgrade-database command that Homebrew gives you.
-* [Pyenv](https://github.com/pyenv/pyenv)
+* Install [Pyenv](https://github.com/pyenv/pyenv)
 * Install [NVM](https://github.com/nvm-sh/nvm)
   * Default: [zsh-nvm](https://github.com/lukechilds/zsh-nvm) - Using plugin repo as sub-module.
   * With Brew: `brew install nvm` (not supported by nvm directly)
@@ -89,7 +95,7 @@ nvm install --lts
 Add each of the following to Path:
 
 ```Shell
-/usr/local/opt/node@16/bin
+# /usr/local/opt/node@16/bin
 ```
 
 ### Create SSH Keys
@@ -106,8 +112,6 @@ ssh-keygen -t rsa -b 4096 -C "Me MyName (MyDevice) <me@mydomain.com>"
 
 ## Personal Programs
 
-* Open another shell tab in iTerm2; install p10k recommended font.
-  * Follow instructions for font install. Other p10k settings already in dotfiles configuration.
 * Install [Facebook Messenger](https://formulae.brew.sh/cask/messenger)
 * Install Discord
 

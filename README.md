@@ -11,11 +11,25 @@ Possible Guide: [How to Set up an Apple Mac for Software Development](https://ww
   * Apple ID required for recovery & some installs.
 * Enable File Vault; Also, Time Machine Backups settings as desired.
 * Optional from above Possible Guide: Securing the Safari Browser, Security & Privacy, Spotlight.
-* Install [Xcode on Mac App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+* Decide on directory for '.' files and dotfiles repo -- Possibly prepending source command.
+  * Example: use destination directory `~/dots` and place repo in `~/dot_src`
+    -- `ZDOTDIR="$HOME/dots" && DOTFILEDIR="$HOME/dot_src" && source pre_install_env.sh`
+    Will place `~/dot_src` for repo and `~/dots/.zshrc`, `~/dots/.zshenv`, etc for setup files.
+* Get a local copy of `pre_install_env.sh` file (by git clone, or simply copy & paste)
+* Set some pre-install env variables with `pre_install_env.sh`:
+  1) Some [XDG](https://wiki.archlinux.org/title/XDG_Base_Directory)
+     * XDG_CONFIG_HOME (~/.config default, analogous to /etc)
+     * XDG_CACHE_HOME (~/.cache default, analogous to /var/cache)
+     * XDG_DATA_HOME (~/.local/share default, analogous to /usr/share)
+     * XDG_STATE_HOME (~/.local/state default, analogous to /var/lib)
+     * XDG_CONFIG_DIRS (/etc/xdg default, analogous to PATH and can be ':' delimitated)
+     * XDG_DATA_DIRS (/usr/local/share:/usr/share default, also analogous to PATH)
+  2) Ensure those directories exist.
+  3) Set ENV variables for Oh-my-zsh, pyenv, nvm, poetry.
+     * Note: python-poetry may use ~/.poetry [SOURCE](https://github.com/python-poetry/poetry/issues/2148#issuecomment-943951697)
+* Install Xcode by cli or [App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 * Install [Homebrew](https://brew.sh); Update homebrew, xcode CLI, path
-* Set ENV variables for XDG_CONFIG_HOME & ensure directory is made.
-* Set ENV variables for Oh-my-zsh, pyenv, nvm, poetry.
-* Install [Bash](https://www.shell-tips.com/mac/upgrade-bash/); Upgrade to allow Associative Arrays
+* Install [Bash](https://www.shell-tips.com/mac/upgrade-bash/); Upgrade to get Associative Arrays
 * Install Git (updated compared to one automatically in MacOS and Xcode).
 * Install [shellcheck](https://github.com/koalaman/shellcheck#installing)
 * Install [pre-commit](https://formulae.brew.sh/formula/pre-commit)
@@ -30,17 +44,9 @@ Possible Guide: [How to Set up an Apple Mac for Software Development](https://ww
 Open terminal and execute commands:
 
 ```Shell
+source pre_install_env.sh
+xcode-select —-install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}";
-[ -d "$XDG_CONFIG_HOME" ] || mkdir -p "$XDG_CONFIG_HOME"
-export ZSH=$XDG_CONFIG_HOME/oh-my-zsh
-export ZSH_CUSTOM=$HOME/dotfiles/shell/custom
-export PYENV_ROOT=$XDG_CONFIG_HOME/pyenv
-export NVM_DIR=$XDG_CONFIG_HOME/nvm
-export POETRY_HOME=$XDG_CONFIG_HOME/poetry
-export npm_config_cache=$XDG_CONFIG_HOME/npm
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npmrc
 brew doctor
 brew update
 brew install bash shellcheck pre-commit neovim pygments

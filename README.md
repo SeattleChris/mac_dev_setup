@@ -17,13 +17,7 @@ Possible Guide: [How to Set up an Apple Mac for Software Development](https://ww
     Will place `~/dot_src` for repo and `~/dots/.zshrc`, `~/dots/.zshenv`, etc for setup files.
 * Get a local copy of `pre_install_env.sh` file (by git clone, or simply copy & paste)
 * Set some pre-install env variables with `pre_install_env.sh`:
-  1) Some [XDG](https://wiki.archlinux.org/title/XDG_Base_Directory)
-     * XDG_CONFIG_HOME (~/.config default, analogous to /etc)
-     * XDG_CACHE_HOME (~/.cache default, analogous to /var/cache)
-     * XDG_DATA_HOME (~/.local/share default, analogous to /usr/share)
-     * XDG_STATE_HOME (~/.local/state default, analogous to /var/lib)
-     * XDG_CONFIG_DIRS (/etc/xdg default, analogous to PATH and can be ':' delimitated)
-     * XDG_DATA_DIRS (/usr/local/share:/usr/share default, also analogous to PATH)
+  1) Some [XDG](https://wiki.archlinux.org/title/XDG_Base_Directory) -- see comments in file.
   2) Ensure those directories exist.
   3) Set ENV variables for Oh-my-zsh, pyenv, nvm, poetry.
      * Note: python-poetry may use ~/.poetry [SOURCE](https://github.com/python-poetry/poetry/issues/2148#issuecomment-943951697)
@@ -38,9 +32,10 @@ Possible Guide: [How to Set up an Apple Mac for Software Development](https://ww
 * Install [pygments](https://formulae.brew.sh/formula/pygments) (python colorizing) or 'chroma'
 * Add upgraded bash (/opt/homebrew/bin/bash) to allowed shells (/private/etc/shells)
 * enable bash completions (while using zsh).
+* Install Oh-My-Zsh into .config directory (assuming `pre_install_env.sh` worked)
 * Git clone [dotfiles](https://github.com/SeattleChris/dotfiles.git) repo & submodules
-* Install Oh-My-Zsh into .config directory.
-* Copy dotfiles zsh setup files to user root.
+* Copy dotfiles zsh setup files for the user (.zshrc, .zshenv, .zprofile, .zlogin, etc)
+
 Open terminal and execute commands:
 
 ```Shell
@@ -53,13 +48,15 @@ brew install bash shellcheck pre-commit neovim pygments
 brew install --cask iterm2
 echo "/opt/homebrew/bin/bash" | sudo tee -a /private/etc/shells
 autoload bashcompinit && bashcompinit
-git clone git@github.com:SeattleChris/dotfiles.git "${DOTFILEDIR:-$HOME/dotfiles}" || exit
-cd "${DOTFILEDIR:-$HOME/dotfiles}" || exit
-git submodule update --init --recursive
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+export DOTFILEDIR="${DOTFILEDIR:-$HOME/dotfiles}"
+git clone git@github.com:SeattleChris/dotfiles.git "$DOTFILEDIR"
+cd "$DOTFILEDIR"
+git submodule update --init --recursive
 typeset -a z_files; z_files=('zlogin' 'zprofile' 'zshenv' 'zshrc')
 typeset src="${SHELLDIR:-$HOME/dotfiles/shell}" dest="${ZDOTDIR:-$HOME}"
 for z in "${z_files[@]}"; do cp '-i' "${src}/${z}" "${dest}/.${z}"; done
+unset -v z_files src dest z
 ```
 
 ## Dev Tooling
@@ -113,3 +110,8 @@ p10k configure
 brew install --cask messenger
 brew install --cask discord
 ```
+
+## Resources of patterns from Linux
+
+* Useful [Zsh resource](https://wiki.archlinux.org/title/Zsh)
+* Linux [Environment Variables](https://wiki.archlinux.org/title/Environment_variables)

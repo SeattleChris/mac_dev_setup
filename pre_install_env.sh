@@ -1,4 +1,29 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
+# Compatiblity: This script can be sourced in zsh or bash or likely others. See shebang note below.
+#
+# Description: Sets ENV variables wanted BEFORE many utilities are installed.
+# Author: Chris Chapman
+# Site: https://github.com/SeattleChris
+# shebang (optional first line): `#!/usr/bin/env zsh` or `#!/usr/bin/env bash` or likely others.
+#
+# Sets DOTFILEDIR -- used internally and by some 'dotfiles' setups.
+# Sets ZDOTDIR -- used by zsh (maybe) and oh-my-zsh.
+# Sets ZSH and ZSH_CUSTOM -- used by oh-my-zsh and possibly other managers.
+# Sets destinations used at time of install for: pyenv, nvm, npm, and poetry.
+#  - Note: python-poetry may ignore POETRY_HOME and still use ~/.poetry
+#  - [Reference](https://github.com/python-poetry/poetry/issues/2148#issuecomment-943951697)
+# Sets XDG_* variables and ensures expected directories exist. See specifications and summary.
+#
+# Specifications [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/latest/)
+# Useful summary: [XDG](https://wiki.archlinux.org/title/XDG_Base_Directory)
+# * XDG_CONFIG_HOME (~/.config default, analogous to /etc)
+# * XDG_CACHE_HOME (~/.cache default, analogous to /var/cache)
+# * XDG_DATA_HOME (~/.local/share default, analogous to /usr/share)
+# * XDG_STATE_HOME (~/.local/state default, analogous to /var/lib)
+# * XDG_CONFIG_DIRS (/etc/xdg default, analogous to PATH and can be ':' delimitated)
+# * XDG_DATA_DIRS (/usr/local/share:/usr/share default, also analogous to PATH)
+#
+
 echo "Set pre-install variables. Done in 4 stages --"
 typeset d=''
 export ZDOTDIR="${ZDOTDIR:-$HOME}"

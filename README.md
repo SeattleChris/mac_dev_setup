@@ -49,14 +49,7 @@ brew install --cask iterm2
 echo "/opt/homebrew/bin/bash" | sudo tee -a /private/etc/shells
 autoload bashcompinit && bashcompinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-export DOTFILEDIR="${DOTFILEDIR:-$HOME/dotfiles}"
-git clone git@github.com:SeattleChris/dotfiles.git "$DOTFILEDIR"
-cd "$DOTFILEDIR"
-git submodule update --init --recursive
-typeset -a z_files; z_files=('zlogin' 'zprofile' 'zshenv' 'zshrc')
-typeset src="${SHELLDIR:-$HOME/dotfiles/shell}" dest="${ZDOTDIR:-$HOME}"
-for z in "${z_files[@]}"; do cp '-i' "${src}/${z}" "${dest}/.${z}"; done
-unset -v z_files src dest z
+source get_dotfiles.sh
 ```
 
 ## Dev Tooling

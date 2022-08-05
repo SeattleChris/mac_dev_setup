@@ -17,5 +17,5 @@ git clone "$DOTFILEREPO" "$DOTFILEDIR"  '--recurse-submodules --remote-submodule
 typeset -a z_files; z_files=('zlogin' 'zprofile' 'zshenv' 'zshrc')
 typeset src="${SHELLDIR:-$HOME/dotfiles/shell}" dest="${ZDOTDIR:-$HOME}"
 for z in "${z_files[@]}"; do cp '-i' "${src}/${z}" "${dest}/.${z}"; done
-unset -v z_files src dest z
 cd "$start_dir" || echo "unable to return to $start_dir "
+unset -v z_files src dest z start_dir

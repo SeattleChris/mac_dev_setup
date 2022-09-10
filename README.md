@@ -125,3 +125,12 @@ brew install --cask discord
 
 * Useful [Zsh resource](https://wiki.archlinux.org/title/Zsh)
 * Linux [Environment Variables](https://wiki.archlinux.org/title/Environment_variables)
+
+## Mac Settings for User preferences
+
+* Finder Preferences:
+  * Sidebar:
+    * [?] Pictures
+    * [x] [home-for-user]
+  * Advanced:
+    * [x] Show all filename extensions

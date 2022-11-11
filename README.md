@@ -75,6 +75,7 @@ Decide which of the following needed, and install as desired:
 * Ruby Development updates and tools (used by MacOS a lot).
 * PostgreSQL
   * If you upgrade your copy of PostgreSQL, you should use the postgresql-upgrade-database command that Homebrew gives you.
+* Install [MySQL](https://formulae.brew.sh/formula/mysql)
 * Install [Pyenv](https://github.com/pyenv/pyenv)
 * Install [NVM](https://github.com/nvm-sh/nvm)
   * Default: [zsh-nvm](https://github.com/lukechilds/zsh-nvm) - Using plugin repo as sub-module.
@@ -88,6 +89,7 @@ brew install --cask visual-studio-code
 brew install --cask zoom
 brew install autoconf automake gdbm gmp libksba libtool libyaml openssl pkg-config readline
 brew install postgresql
+brew install mysql
 brew install pyenv
 nvm install --lts
 ```

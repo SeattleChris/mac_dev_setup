@@ -94,6 +94,13 @@ brew install pyenv
 nvm install --lts
 ```
 
+You may need to install pip (pip3) for the pyenv python version. Make sure the expected python version and path. Then ensure pip3 is installed.
+
+```Shell
+where python
+python -m pip install --upgrade pip
+```
+
 Add each of the following to Path:
 
 ```Shell
